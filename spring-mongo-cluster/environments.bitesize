@@ -1,0 +1,28 @@
+project: sample
+environments:
+  - name: Development
+    namespace: sample-dev
+    deployment:
+      method: rolling-upgrade
+    services:
+      - name: mongodb
+        type: mongo
+      - name: springmongo
+        external_url: springmongo-sample.dev-bite.io
+        port: 8080 
+        ssl: "false"
+        replicas: 1
+        env:
+          - secret: VAULT_TOKEN
+            value: vault-sample-dev-read
+          - name: VAULT_ADDR
+            value: "https://vault.kube-system.svc.cluster.local:8243"
+          - name: VAULT_SKIP_VERIFY
+            value: "false"
+          - secret: CONSUL_TOKEN
+            value: consul-sample-dev-write
+          - name: CONSUL_HOST
+            value: "consul.kube-system.svc.cluster.local"
+          - name: CONSUL_PORT
+            value: "8500"
+

@@ -1,0 +1,17 @@
+project: sample
+components:
+  - name: node-app
+    os: linux
+    dependencies:
+      - type: debian-package
+        package: nodejs
+    repository:
+      git: git@github.com:thilinapiy/bitesize-sample-apps.git
+      branch: nodejsapp1-v2.0.10
+    build:
+      - shell: mkdir -p /app
+      - shell: cp -rf * /app
+      - shell: /usr/local/bin/fpm -s dir -n node-app --iteration $(date "+%Y%m%d%H%M%S") -t deb /app
+    artifacts:
+      - location: "*.deb"
+

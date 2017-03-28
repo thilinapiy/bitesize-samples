@@ -1,0 +1,15 @@
+project: sample
+components:
+  - name: springmongo
+    os: linux
+    repository:
+      git: git@github.com:thilinapiy/bitesize-sample-apps.git
+      branch: springmongo-v2.0.10
+    build:
+      - shell: mkdir -p /app
+      - shell: mvn clean package
+      - shell: cp -rf target/*.jar /app
+      - shell: /usr/local/bin/fpm -s dir -n springmongo -v 1.0.0 --iteration $(date "+%Y%m%d%H%M%S") -t deb /app
+    artifacts:
+      - location: "*.deb"
+
