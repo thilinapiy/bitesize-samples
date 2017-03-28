@@ -10,3 +10,4 @@ applications:
           build: springmongo
         version: 1.0
     command: "envconsul -consul=consul.kube-system.svc.cluster.local:8543  -ssl -ssl-verify=false -prefix=sample-dev -secret=secret/sample-dev/mongo -once java -jar /app/mongo-tutorial-1.0.0.jar -dspring.data.mongodb.uri=mongodb://${mongo_username}:${secret_sample_dev_mongo_mongo_password}@${mongo_ipaddress1},${mongo_ipaddress2},${mongo_ipaddress3},${mongo_ipaddress4}/${mongo_dbname}?readPreference=secondaryPreferred"
+
